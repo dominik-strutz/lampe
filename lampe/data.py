@@ -254,7 +254,7 @@ class H5Dataset(IterableDataset):
                     x.split(self.batch_size),
                 )
 
-    def to_memory(self) -> JointDataset:
+    def to_memory(self, size=-1) -> JointDataset:
         r"""Loads all pairs in memory and returns them as a :class:`JointDataset`.
 
         Example:
@@ -262,8 +262,8 @@ class H5Dataset(IterableDataset):
         """
 
         return JointDataset(
-            self.file['theta'][:],
-            self.file['x'][:],
+            self.file['theta'][:size],
+            self.file['x'][:size],
             batch_size=self.batch_size,
             shuffle=self.shuffle,
         )
